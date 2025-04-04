@@ -56,7 +56,7 @@ local embed = {
             {["name"] = "HWID", ["value"] = decodedHWID, ["inline"] = false},
           
         },
-        ["footer"] = {["text"] = "HWID Logger (Decoded Test)"},
+        ["footer"] = {["text"] = "Logger"},
         ["timestamp"] = os.date("!%Y-%m-%dT%H:%M:%SZ")
     }}
 }
