@@ -64,10 +64,22 @@ local embed = {
 -- Send to Discord webhook
 local request = http_request or request or syn.request or fluxus.request or http and http.request
 
-request({
-    Url = "https://discord.com/api/webhooks/1357403916253266101/z0s7i2kdN4GL-o0Zq8ERQ-bEq6PWkA_8zH-q7RX7wB9Paa-w-ET72DrusXxwt8Rj-_VW",
-    Method = "POST",
-    Headers = {
-        ["Content-Type"] = "application/json"
-    },
-    Body = HttpService:JSONEncode(embed)
+-- Ensure the request function exists
+if request then
+    local success, response = pcall(function()
+        request({
+            Url = "https://discord.com/api/webhooks/1357403916253266101/z0s7i2kdN4GL-o0Zq8ERQ-bEq6PWkA_8zH-q7RX7wB9Paa-w-ET72DrusXxwt8Rj-_VW",
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = HttpService:JSONEncode(embed)
+        })
+    end)
+
+    if not success then
+        warn("Failed to send webhook: " .. response)
+    end
+else
+    warn("Request function not available!")
+end
